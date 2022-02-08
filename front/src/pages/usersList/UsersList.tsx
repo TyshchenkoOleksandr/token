@@ -2,6 +2,7 @@ import React, { FC, useEffect, useState } from 'react';
 import useAxios from 'axios-hooks';
 
 import { api } from '../../configs/urls/api';
+import PageWrapper from '../../components/pageWrapper/PageWrapper';
 
 const UsersList: FC = () => {
   const [users, setUsers] = useState<{_id: string, email: string, password: string}[]>([]);
@@ -20,9 +21,11 @@ const UsersList: FC = () => {
   });
 
   return (
-    <ul>
-      {list}
-    </ul>
+    <PageWrapper>
+      <ul>
+        {list}
+      </ul>
+    </PageWrapper>
   );
 };
 
