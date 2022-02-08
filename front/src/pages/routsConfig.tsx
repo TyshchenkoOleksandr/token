@@ -2,7 +2,7 @@ import React from 'react';
 import { v4 } from 'uuid';
 
 import Home from './home/Home';
-import UsersList from '../usersList/UsersList';
+import UsersList from './usersList/UsersList';
 
 export const routsConfig = [
   {
