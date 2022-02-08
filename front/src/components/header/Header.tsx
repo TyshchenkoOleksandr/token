@@ -1,19 +1,17 @@
 import React, { FC } from 'react';
-import { NavLink } from 'react-router-dom';
 
 import useUser from '../../providers/userProvider/useUser';
+import useStylesHeader from './header.theme';
+import MainMenu from '../mainMenu/MainMenu';
 
 const Header: FC = () => {
+  const classes = useStylesHeader();
   const { logout } = useUser();
 
   return (
-    <header>
-      <NavLink to='/'>
-        home
-      </NavLink>
-      <NavLink to='/users'>
-        users
-      </NavLink>
+    <header className={classes.header}>
+      <MainMenu />
+
       <button
         type='button'
         onClick={logout}
