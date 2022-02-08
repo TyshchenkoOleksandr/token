@@ -1,9 +1,11 @@
 import React, { FC, FormEvent, ReactElement } from 'react';
+import { TextField } from '@mui/material';
 import { Formik } from 'formik';
 
 import useUser from '../../providers/userProvider/useUser';
 import useStylesLoginForm from './loginForm.theme';
 import { initialFormikValues } from './loginFormConfig';
+import { loginFormValidationSchema } from './config/loginFormValidationSchema';
 
 const LoginForm: FC = () => {
   const classes = useStylesLoginForm();
@@ -21,29 +23,37 @@ const LoginForm: FC = () => {
     <Formik
       initialValues={initialFormikValues}
       onSubmit={(): void => {}}
+      validationSchema={loginFormValidationSchema}
     >
       {(props): ReactElement => (
         <form className={classes.loginForm} onSubmit={(event: FormEvent<HTMLFormElement>): void => {
           event.preventDefault();
-          onLoginButtonClick(props.values.email, props.values.password);
+          if (!props.errors.email && !props.errors.password && !props.touched.email && !props.touched.password) {
+            onLoginButtonClick(props.values.email, props.values.password);
+          }
         }}
         >
-          <input
-            type='text'
+          <TextField
             name='email'
-            placeholder='Enter your email'
+            error={!!props.errors.email}
+            label={props.errors.email}
             value={props.values.email}
+            placeholder='Enter your email'
+            fullWidth={true}
+            sx={{ display: 'block', width: '250px',  margin: '15px auto' }}
             onChange={props.handleChange}
-            className={classes.loginFormInput}
           />
 
-          <input
-            type='password'
+          <TextField
             name='password'
-            placeholder='Enter your password'
+            type='password'
+            error={!!props.errors.password}
+            label={props.errors.password}
             value={props.values.password}
+            placeholder='Enter your password'
+            fullWidth={true}
+            sx={{ display: 'block', width: '250px',  margin: '15px auto' }}
             onChange={props.handleChange}
-            className={classes.loginFormInput}
           />
           <div className={classes.loginFormButtonBox}>
             <button type='submit'>
