@@ -6,6 +6,7 @@ import { IUser } from '../../shared/interfaces/user.interface';
 const UserContext = createContext<any | undefined>(undefined);
 
 const UserProvider: FC = ({ children }) => {
+  const [isFirstLoading, setIsFirstLoading] = useState<boolean>(true);
   const [user, setUser] = useState<IUser>({
     id: '',
     email: '',
@@ -28,7 +29,9 @@ const UserProvider: FC = ({ children }) => {
         ...response.data.user,
         isAuth: true,
       });
+      setIsFirstLoading(false);
     } catch (error) {
+      setIsFirstLoading(false);
       console.log(error);
     }
   };
@@ -80,6 +83,7 @@ const UserProvider: FC = ({ children }) => {
     return {
       user,
       checkAuthLoading,
+      isFirstLoading,
       login,
       logout,
       registration,
@@ -87,6 +91,7 @@ const UserProvider: FC = ({ children }) => {
   }, [
     user,
     checkAuthLoading,
+    isFirstLoading,
   ]);
 
   return (

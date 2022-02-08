@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import useUser from '../../../providers/userProvider/useUser';
+import useUser from '../../providers/userProvider/useUser';
 
 const Home: FC = () => {
   const { user } = useUser();

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 
-import LoginForm from '../loginForm/LoginForm';
+import LoginForm from '../../components/loginForm/LoginForm';
 import useStylesUnauthorizedContent from './unauthorizedContent.theme';
 
 const UnauthorizedContent: FC = () => {
