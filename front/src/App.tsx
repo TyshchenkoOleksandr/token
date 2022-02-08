@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { ReactElement } from 'react';
+import { BrowserRouter } from 'react-router-dom';
 
-function App() {
+import { AxiosClient } from './AxiosClient';
+import AuthorizationChecker from './AuthorizationChecker';
+import Layout from './components/contentSelector/ContentSelector';
+
+function App(): ReactElement {
+
   return (
-    <div>
-      test component
-    </div>
+    <AxiosClient>
+      <BrowserRouter>
+        <AuthorizationChecker>
+          <Layout />
+        </AuthorizationChecker>
+      </BrowserRouter>
+    </AxiosClient>
   );
 }
 
